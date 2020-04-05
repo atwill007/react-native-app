@@ -26,68 +26,28 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-import InitComponent from './src/components/InitComponent';
-import HelloWorldApp from './src/components/HelloWorldApp';
-import Bananas from './src/components/Bananas';
-import PizzaTranslator from './src/components/PizzaTranslator';
-import TouchEvent from './src/components/TouchEvent';
-import ScrollDemo from './src/components/ScrollDemo';
-import FlatListDemo from './src/components/FlatListDemo';
-import ApiFetch from './src/components/ApiFetch';
-import MovieList from './src/components/MovieList';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
 
-const App: () => React$Node = () => {
-  const tabDict = {
-    init: <InitComponent />,
-    custom: (
-      <React.Fragment>
-        <HelloWorldApp name="RN" />
-        <Bananas />
-        <PizzaTranslator />
-        <TouchEvent />
-        <ScrollDemo />
-        <FlatListDemo />
-        <ApiFetch />
-      </React.Fragment>
-    ),
-    movies: <MovieList/>
-  };
-  const tabNavs = Object.keys(tabDict);
-  const [currTab, setTab] = useState(tabNavs[0]);
+const Stack = createStackNavigator();
 
-  const content = tabDict[currTab];
-  // Alert.alert('content: ', tabNavs.join('-'))
+import InitScreen from './src/pages/Init/InitScreen';
+import DemoScreen from './src/pages/Demo/DemoScreen';
+import MovieTopScreen from './src/pages/Movie/MovieTopScreen';
+import ProfileScreen from './src/pages/Profile/ProfileScreen';
 
+function App() {
   return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
-          {/* <Header /> */}
-          {global.HermesInternal == null ? null : (
-            <View style={styles.engine}>
-              <Text style={styles.footer}>Engine: Hermes</Text>
-            </View>
-          )}
-          <View style={styles.body}>
-            <View style={{flexDirection: 'row', justifyContent: 'center'}}>
-              {tabNavs.map((item) => (
-                <Button
-                  key={item}
-                  title={item}
-                  color={currTab === item ? '#841584' : ''}
-                  onPress={() => setTab(item)} />
-              ))}
-            </View>
-            {content}
-          </View>
-        </ScrollView>
-      </>
-    </>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="MovieTop" component={MovieTopScreen} />
+        <Stack.Screen name="Profile" component={ProfileScreen} />
+        <Stack.Screen name="Init" component={InitScreen} />
+        <Stack.Screen name="Demo" component={DemoScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
-};
+}
 
 const styles = StyleSheet.create({
   scrollView: {

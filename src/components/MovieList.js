@@ -18,7 +18,7 @@ class MovieList extends Component {
   async fetchData() {
     // const movies = await fetch(REQUEST_URL).then((res) => res.json());
     const movies = await axiosGet('/movies/top250')
-    Alert.alert('fetch movies: ', movies.length + '')
+    // Alert.alert('fetch movies: ', movies.length + '')
     this.setState(state => ({
       data: state.data.concat(movies),
       loaded: true,
