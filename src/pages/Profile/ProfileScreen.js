@@ -1,13 +1,32 @@
 import React, {Component} from 'react';
-import {Button, Text} from 'react-native';
+import {View, Button, Text} from 'react-native';
+import {getUserInfo} from '../../common/utils/auth';
 
 class ProfileScreen extends Component {
-  static customName = 'Profile'
+  static customName = 'Profile';
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLogin: false,
+      userInfo: null,
+    };
+  }
+
+  async componentWillMount() {
+    const userInfo = await getUserInfo();
+    if (userInfo)
+      this.setState({
+        isLogin: true,
+        userInfo,
+      });
+  }
 
   render() {
     const {goBack, push} = this.props.navigation;
+    const {state} = this;
     return (
-      <>
+      <View style={{alignItems: 'center'}}>
         <Button
           title="返回"
           onPress={() => {
@@ -30,7 +49,12 @@ class ProfileScreen extends Component {
           }}></Button>
 
         <Text>Profile Page</Text>
-      </>
+        {state.isLogin ? (
+          <Text>userInfo: {JSON.stringify(state.userInfo)}</Text>
+        ) : (
+          <Text>未登录</Text>
+        )}
+      </View>
     );
   }
 }

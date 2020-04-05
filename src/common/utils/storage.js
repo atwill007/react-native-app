@@ -19,3 +19,11 @@ export const getItem = async (key) => {
     return Promise.reject(e)
   }
 }
+
+export const removeItem = async (key) => {
+  try {
+    return await AsyncStorage.removeItem(key)
+  } catch(e) {
+    return Promise.reject(e)
+  }
+}
