@@ -1,5 +1,5 @@
 # react-native-app
-> 基于 react-native 4.5.1 版本构建, 本项目用于react-native学习所用，欢迎提供交流意见
+> 基于 react-native 命令行工具 v4.5.1 版本构建, 本项目用于react-native学习所用，欢迎提供交流意见
 
 ## run
 
