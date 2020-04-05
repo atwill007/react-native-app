@@ -28,23 +28,34 @@ import {
 
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
 
-import InitScreen from './src/pages/Init/InitScreen';
-import DemoScreen from './src/pages/Demo/DemoScreen';
-import MovieTopScreen from './src/pages/Movie/MovieTopScreen';
-import ProfileScreen from './src/pages/Profile/ProfileScreen';
+import screenConfig from './src/pages/screenConfig';
+
+function StackNavigatorRender(list) {
+  return (
+    <Stack.Navigator>
+      {list.map((item) => (
+        <Stack.Screen name={item.name} component={item.component} />
+      ))}
+    </Stack.Navigator>
+  );
+}
 
 function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="MovieTop" component={MovieTopScreen} />
-        <Stack.Screen name="Profile" component={ProfileScreen} />
-        <Stack.Screen name="Init" component={InitScreen} />
-        <Stack.Screen name="Demo" component={DemoScreen} />
-      </Stack.Navigator>
+      <Tab.Navigator>
+        {screenConfig.tabs.map((item) => (
+          <Stack.Screen
+            name={item.name}
+            component={() => StackNavigatorRender(item.components)}
+          />
+        ))}
+      </Tab.Navigator>
     </NavigationContainer>
   );
 }

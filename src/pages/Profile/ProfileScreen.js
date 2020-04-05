@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Button, Text} from 'react-native';
 
 class ProfileScreen extends Component {
+  static customName = 'Profile'
 
   render() {
     const {goBack, push} = this.props.navigation;

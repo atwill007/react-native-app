@@ -3,6 +3,7 @@ import {Button} from 'react-native'
 import MovieList from '../../components/MovieList'
 
 class MovieTopScreen extends Component {
+  static customName = 'MovieTop'
   // static navigationOptions = {
   //   title: 'Movies Top',
   // };
